@@ -1,0 +1,24 @@
+var qTimer,qData=[{q:"বেঙ্গালুরুর ‘ধ্যান মন্দির’ কোন সংস্থার আন্তর্জাতিক কেন্দ্রে উদ্বোধন করা হয়েছে?",a:"Art of Living",opts:["ISKCON","Art of Living","Brahma Kumaris","Ramakrishna Mission"]},{q:"‘ধ্যান মন্দির’ উদ্বোধন উপলক্ষে কোন আধ্যাত্মিক গুরুর ৭০তম জন্মদিন পালিত হয়?",a:"শ্রী শ্রী রবিশঙ্কর",opts:["সদগুরু","বাবা রামদেব","শ্রী শ্রী রবিশঙ্কর","মাতা অমৃতানন্দময়ী"]},{q:"PM MITRA Mega Textile Park কোথায় উদ্বোধন করা হয়েছে?",a:"ওয়ারাঙ্গল",opts:["নাগপুর","ওয়ারাঙ্গল","বিশাখাপত্তনম","পুনে"]},{q:"সরকারের ‘5F Vision’-এর শেষ ধাপ কী?",a:"Foreign",opts:["Factory","Fibre","Fashion","Foreign"]},{q:"মহারাষ্ট্রের CBG নীতি ২০২৬-২৭ অর্থবর্ষে কত টাকা বরাদ্দ করেছে?",a:"৫০০ কোটি টাকা",opts:["২০০ কোটি টাকা","৫০০ কোটি টাকা","৭৫০ কোটি টাকা","১০০০ কোটি টাকা"]},{q:"মহারাষ্ট্রের CBG নীতি কোন কেন্দ্রীয় স্কিমের সাথে সামঞ্জস্যপূর্ণ?",a:"GOBARdhan",opts:["PM-KUSUM","GOBARdhan","PM Gati Shakti","Ujjwala Yojana"]},{q:"ঝাড়খণ্ড কোন স্তরে শূন্য শতাংশ ড্রপআউট হার অর্জন করেছে?",a:"প্রাথমিক স্তর",opts:["মাধ্যমিক","উচ্চমাধ্যমিক","প্রাথমিক স্তর","কলেজ স্তর"]},{q:"ঝাড়খণ্ড সরকারের ডিজিটাল ট্র্যাকিং পোর্টালের নাম কী?",a:"শিক্ষা সেতু",opts:["শিক্ষা বন্ধু","শিক্ষা সেতু","বিদ্যা পোর্টাল","জ্ঞানদীপ"]},{q:"ভারতের প্রথম ডিজিটাল জনশুমারি কোন সালে অনুষ্ঠিত হবে?",a:"২০২৭",opts:["২০২৫","২০২৬","২০২৭","২০২৮"]},{q:"২০২৭ সালের জনশুমারিতে গণনাকারীদের পরিচয় যাচাইয়ের জন্য কী ব্যবহার করা হবে?",a:"QR-Code",opts:["বায়োমেট্রিক কার্ড","RFID চিপ","QR-Code","স্মার্ট কার্ড"]},{q:"মিকা (MICA) মিসাইল কোন ধরনের মিসাইল?",a:"Air-to-Air",opts:["Surface-to-Air","Air-to-Air","Ballistic Missile","Cruise Missile"]},{q:"মিকা মিসাইল ভারতীয় বিমান বাহিনীর কোন যুদ্ধবিমানে ব্যবহৃত হয়?",a:"Rafale",opts:["Tejas","Sukhoi-30 MKI","Rafale","Jaguar"]},{q:"MICA মিসাইল রক্ষণাবেক্ষণ চুক্তি IAF কোন সংস্থার সঙ্গে করেছে?",a:"MBDA",opts:["Boeing","Lockheed Martin","MBDA","HAL"]},{q:"অ্যাডমিশন ওভারসিয়িং কমিটির চেয়ারম্যান হিসেবে কাকে নিয়োগ করা হয়েছে?",a:"বিচারপতি রামচন্দ্র হুদ্দার",opts:["বিচারপতি বি. মনোহর","বিচারপতি রামচন্দ্র হুদ্দার","বিচারপতি এন. কুমার","বিচারপতি আর. ভট্ট"]},{q:"অ্যাডমিশন ওভারসিয়িং কমিটির প্রধান কাজ কী?",a:"ভর্তি প্রক্রিয়ার স্বচ্ছতা নিশ্চিত করা",opts:["নতুন বিশ্ববিদ্যালয় স্থাপন","শিক্ষক নিয়োগ","ভর্তি প্রক্রিয়ার স্বচ্ছতা নিশ্চিত করা","পরীক্ষার প্রশ্নপত্র তৈরি"]}],correctSound=document.getElementById("correct-sound"),wrongSound=document.getElementById("wrong-sound");correctSound.volume=.7,wrongSound.volume=.7;var curQ=0,userScore=0,secLeft=15;function beginQuizNow(){document.getElementById("start-area").style.display="none",document.getElementById("quiz-main-container").style.display="block",loadQuestion()}function loadQuestion(){if(curQ>=qData.length){showResult();return}document.getElementById("next-btn-container").style.display="none",secLeft=15,document.getElementById("timer-box").innerHTML=secLeft,document.getElementById("quiz-progress").innerHTML="প্রশ্ন: "+(curQ+1)+"/"+qData.length,document.getElementById("main-q-text").innerHTML=qData[curQ].q;var e="";qData[curQ].opts.forEach(t=>{e+=`
+        <button class="opt-btn"
+        onclick="checkAnswer(this, \`${t}\`)">
+            ${t}
+        </button>
+        `}),document.getElementById("main-opt-container").innerHTML=e,startTimer()}function startTimer(){clearInterval(qTimer),qTimer=setInterval(()=>{secLeft--,document.getElementById("timer-box").innerHTML=secLeft,secLeft<=0&&(clearInterval(qTimer),wrongSound.currentTime=0,wrongSound.play().catch(()=>{}),checkAnswer(null,""))},1e3)}function checkAnswer(e,t){clearInterval(qTimer);var n=qData[curQ].a.trim(),o=document.getElementsByClassName("opt-btn");for(let r of o)r.disabled=!0,r.innerText.trim()===n&&r.classList.add("correct-ans");t.trim()===n?(userScore++,document.getElementById("score-val").innerText=userScore,correctSound.currentTime=0,correctSound.play().catch(()=>{})):e&&(e.classList.add("wrong-ans"),wrongSound.currentTime=0,wrongSound.play().catch(()=>{})),document.getElementById("next-btn-container").style.display="block",curQ++}function showResult(){document.getElementById("question-area").style.display="none",document.getElementById("next-btn-container").style.display="none",document.getElementById("result-area").style.display="block";var e=userScore,t=qData.length,n="",o="";e===t?(n="Outstanding! \uD83C\uDF1F",o="#388e3c"):e>=.8*t?(n="Very Good! \uD83D\uDC4F",o="#1565c0"):e>=.5*t?(n="Good! \uD83D\uDC4D",o="#f57c00"):(n="Need More Practice! \uD83D\uDCDA",o="#d32f2f"),document.getElementById("res-score").innerHTML=`
+
+        <div style="
+            color:${o};
+            font-weight:bold;
+            margin-bottom:15px;
+            font-size:1.8rem;
+        ">
+            ${n}
+        </div>
+
+        <div style="
+            font-size:3rem;
+            font-weight:bold;
+        ">
+            ${e} / ${t}
+        </div>
+
+    `}
